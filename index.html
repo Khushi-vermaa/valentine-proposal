@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>For My Favorite Person ❤️</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ff8fab, #ffc2d1);
+        background-size: 400% 400%;
+        animation: bgMove 10s ease infinite;
+      }
+
+      @keyframes bgMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .card {
+        width: 90%;
+        max-width: 360px;
+        background: #fff0f6;
+        padding: 35px 25px;
+        border-radius: 25px;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        animation: pop 0.8s ease forwards;
+        position: relative;
+      }
+
+      @keyframes pop {
+        from {
+          transform: scale(0.7);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      h1 {
+        font-family: "Pacifico", cursive;
+        color: #d6336c;
+        font-size: 26px;
+        margin-bottom: 8px;
+      }
+
+      p {
+        font-size: 14px;
+        margin-bottom: 25px;
+        color: #6c757d;
+      }
+
+      .btns {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        position: relative;
+      }
+
+      .btn {
+        padding: 10px 22px;
+        border: none;
+        border-radius: 25px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .yes {
+        background: #ff4d6d;
+        color: white;
+        box-shadow: 0 0 12px rgba(255, 77, 109, 0.6);
+      }
+
+      .yes:hover {
+        transform: scale(1.1);
+      }
+
+      .no {
+        background: white;
+        color: #ff4d6d;
+        position: absolute;
+      }
+
+      #loveScreen {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #ff4d6d, #ff8fab);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .loveCard {
+        background: white;
+        color: #d6336c;
+        padding: 25px;
+        border-radius: 18px;
+        width: 90%;
+        max-width: 330px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        animation: pop 0.6s ease forwards;
+      }
+
+      .loveCard h2 {
+        font-family: "Pacifico", cursive;
+        font-size: 22px;
+        margin-bottom: 8px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .heart {
+        position: absolute;
+        color: white;
+        animation: fall 5s linear infinite;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(-10vh) rotate(0deg);
+        }
+        100% {
+          transform: translateY(110vh) rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="bgMusic" loop>
+      <source
+        src="./kaazoom-be-my-valentine-valentinex27s-day-song-male-vocal-461604.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <div class="card">
+      <h1>Hey Handsome 💖</h1>
+      <p>Will you be my Valentine this year?</p>
+      <div class="btns">
+        <button class="btn yes" onclick="showLove()">Yes 💘</button>
+        <button class="btn no" id="noBtn">No 🙈</button>
+      </div>
+    </div>
+
+    <div id="loveScreen">
+      <div class="loveCard" id="step1">
+        <h2>You said YES 🥹</h2>
+        <p>You just made my heart happiest 💞</p>
+        <button class="btn yes" onclick="nextStep()">Next ➜</button>
+      </div>
+
+      <div class="loveCard hidden" id="step2">
+        <h2>Coffee Date? ☕</h2>
+        <p>Will you go on a cute coffee date with me?</p>
+        <button class="btn yes" onclick="finalStep()">YESSS 💘</button>
+      </div>
+
+      <div class="loveCard hidden" id="step3">
+        <h2>Yaaayyy 🥰</h2>
+        <p>
+          Be ready on <b>14th February</b> 💖<br />Our love story continues ✨
+        </p>
+      </div>
+    </div>
+
+    <script>
+      const noBtn = document.getElementById("noBtn");
+      noBtn.style.left = "80px";
+      noBtn.style.top = "0px";
+
+      noBtn.addEventListener("touchstart", moveBtn);
+      noBtn.addEventListener("mouseover", moveBtn);
+
+      function moveBtn() {
+        const maxX = window.innerWidth - noBtn.offsetWidth;
+        const maxY = window.innerHeight - noBtn.offsetHeight;
+        noBtn.style.left = Math.random() * maxX + "px";
+        noBtn.style.top = Math.random() * maxY + "px";
+      }
+
+      function showLove() {
+        document.getElementById("loveScreen").style.display = "flex";
+        document.getElementById("bgMusic").play();
+      }
+
+      function nextStep() {
+        step1.classList.add("hidden");
+        step2.classList.remove("hidden");
+      }
+
+      function finalStep() {
+        step2.classList.add("hidden");
+        step3.classList.remove("hidden");
+      }
+
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 12 + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }, 400);
+    </script>
+  </body>
+</html>
